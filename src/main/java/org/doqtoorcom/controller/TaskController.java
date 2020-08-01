@@ -50,6 +50,18 @@ public class TaskController {
         tasks.add(task);
         return task;
     }
+    @DeleteMapping(path = { "/{id}" })
+    public Task deleteTask (@PathVariable("id") String id) {
+        Task deletedTask = null;
+        for (Task task : tasks) {
+            if (task.getTaskId().equals(id)) {
+                tasks.remove(task);
+                deletedTask = task;
+                break;
+            }
+        }
+        return deletedTask;
+    }
 
     private static List<Task> createListTask() {
         List<Task> listTasks = new ArrayList<>();
