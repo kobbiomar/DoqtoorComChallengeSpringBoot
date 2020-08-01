@@ -18,6 +18,18 @@ public class TaskController {
     public List<Task> getTasks() {
         return tasks;
     }
+    @GetMapping(path = { "/{id}" })
+    public Task getTaskByID(@PathVariable("id") String id) {
+        Task getTask = null;
+        for (Task task : tasks) {
+            if (task.getTaskId().equals(id)) {
+                getTask= task;
+                break;
+            }
+        }
+        return  getTask ;
+
+    }
 
     private static List<Task> createListTask() {
         List<Task> listTasks = new ArrayList<>();
