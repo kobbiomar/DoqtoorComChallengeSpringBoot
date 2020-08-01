@@ -3,6 +3,7 @@ package org.doqtoorcom.controller;
 import org.doqtoorcom.model.Task;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,20 @@ public class TaskController {
         }
         return  getTask ;
 
+    }
+    @PutMapping("/{id}")
+    public Task updateTask (@PathVariable(value = "id") String taskId,
+                            @Valid @RequestBody Task taskDetails) {
+        Task newTask = null;
+        for (Task task : tasks) {
+            if (task.getTaskId().equals(taskId)) {
+                newTask = task;
+                newTask.setTaskId(taskDetails.getTaskId());
+                newTask.setDescription(taskDetails.getDescription());
+                break;
+            }
+        }
+        return newTask ;
     }
 
     private static List<Task> createListTask() {
