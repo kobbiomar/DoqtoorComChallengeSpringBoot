@@ -45,6 +45,11 @@ public class TaskController {
         }
         return newTask ;
     }
+    @PostMapping
+    public Task createTask(@RequestBody Task task) {
+        tasks.add(task);
+        return task;
+    }
 
     private static List<Task> createListTask() {
         List<Task> listTasks = new ArrayList<>();
